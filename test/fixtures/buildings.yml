@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  building_name: MyString
+  building_address: MyString
+  favorite_type: 1
+  description: MyString
+
+two:
+  building_name: MyString
+  building_address: MyString
+  favorite_type: 1
+  description: MyString
