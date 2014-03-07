@@ -30,16 +30,28 @@ building_list[27..-1].each do |building|
   #puts building_address.at_css("p")
   building_address = building_info.at_css("p")
   #puts building_address
-  building_info.css("ul").each do |c|
-
-    building_description = c.at_css("li")
-    puts building_description
+  building_description_list = building_info.at_css("ul")
+  building_description = ''
+  if !building_description_list.nil?
+    building_description_list.css("li").each do |c|
+      building_description_substring = c.at_css("a")
+      if !building_description_substring.nil?
+        building_description.concat(building_description_substring.text.strip+"\\n")
+      end
+    end
   end
   building_address.search('br').each do |n|
     n.replace("`")
   end
   m = building_address.text.split("`")
-puts m[3].strip
-break
+  puts building.at_css("a").text.strip
+  puts m[2].strip
+  puts m[3].strip
+  puts building_description+"\n\n\n"
+  Building.create(
+  :building_name=>building.at_css("a").text.strip,
+  :building_address=>m[2].strip+" "+m[3].strip,
+  :description=>building_description)
+
 # puts building.at_css("a").text.strip+ " | " + building_number
 end
